@@ -50,4 +50,5 @@ typedef NS_ENUM(NSUInteger, YALTabBarState) {
 @property (nonatomic, assign) CGFloat extraTabBarItemHeight;
 @property (nonatomic, assign) CGFloat offsetForExtraTabBarItems;
 
+- (void)hideTabBarView:(BOOL)hide completion:(void (^)(BOOL finished))completion;
 @end

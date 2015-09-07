@@ -657,4 +657,34 @@ typedef NS_ENUM(NSUInteger, YALAnimatingState) {
     });
 }
 
+- (void)hideTabBarView:(BOOL)hide completion:(void (^)(BOOL finished))completion {
+    if (hide) {
+        [UIView animateWithDuration:kYALHideExtraTabBarItemViewAnimationParameters.duration
+                         animations:^{
+                             self.center = CGPointMake(self.center.x, self.center.y + CGRectGetHeight(self.frame));
+                         } completion:^(BOOL finished) {
+                             self.hidden = YES;
+                             completion(finished);
+                         }];
+    }
+    else {
+        self.hidden = NO;
+        [UIView animateWithDuration:kYALShowExtraTabBarItemViewAnimationParameters.duration
+                              delay:kYALShowExtraTabBarItemViewAnimationParameters.delay
+             usingSpringWithDamping:kYALShowExtraTabBarItemViewAnimationParameters.damping
+              initialSpringVelocity:kYALShowExtraTabBarItemViewAnimationParameters.velocity
+                            options:kYALShowExtraTabBarItemViewAnimationParameters.options
+                         animations:^{
+                             self.center = CGPointMake(self.center.x, self.center.y - CGRectGetHeight(self.frame));
+                         } completion:^(BOOL finished) {
+                             completion(finished);
+                         }];
+        
+        CAAnimation *animationLeft = [CAAnimation animationForExtraLeftBarItem];
+        [self.extraLeftButton.layer addAnimation:animationLeft forKey:nil];
+        CAAnimation *animationRight = [CAAnimation animationForExtraRightBarItem];
+        [self.extraRightButton.layer addAnimation:animationRight forKey:nil];
+    }
+}
+
 @end

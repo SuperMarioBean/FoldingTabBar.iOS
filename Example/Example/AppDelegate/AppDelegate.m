@@ -46,8 +46,8 @@
     
     
     YALTabBarItem *item4 = [[YALTabBarItem alloc] initWithItemImage:[UIImage imageNamed:@"settings_icon"]
-                                                      leftItemImage:nil
-                                                     rightItemImage:nil];
+                                                      leftItemImage:[UIImage imageNamed:@"search_icon"]
+                                                     rightItemImage:[UIImage imageNamed:@"new_chat_icon"]];
     
     tabBarController.rightBarItems = @[item3, item4];
     
