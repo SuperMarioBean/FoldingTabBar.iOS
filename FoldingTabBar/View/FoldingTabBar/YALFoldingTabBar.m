@@ -658,6 +658,10 @@ typedef NS_ENUM(NSUInteger, YALAnimatingState) {
 }
 
 - (void)hideTabBarView:(BOOL)hide completion:(void (^)(BOOL finished))completion {
+    if (self.hidden == hide) {
+        return;
+    }
+    
     if (hide) {
         [UIView animateWithDuration:kYALHideExtraTabBarItemViewAnimationParameters.duration
                          animations:^{
